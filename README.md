@@ -1,7 +1,7 @@
 # VMCode
 
 Technology:
-Angular 7, Java 1.8 and NodeJS 10.15, Maven 3, Swagger-UI
+Angular 7, Material-ui, Spring Boot 2.0, Java 1.8 and NodeJS 10.15, Maven 3, Swagger-UI
 
 Dev Instructions
 
