@@ -8,20 +8,22 @@
          
         </mat-form-field>
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Middle Name/Initial" [(ngModel)]="vmregform.middlename"  name="middlename" required>
+            <input matInput placeholder="Middle Name/Initial" minlength="1"  [(ngModel)]="vmregform.middlename"  name="middlename" required>
         </mat-form-field>
         <mat-form-field class="example-full-width">
             <input matInput placeholder="Last Name" [(ngModel)]="vmregform.lastname"  name="lastname" required>
         </mat-form-field>
        
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Email"  [(ngModel)]="vmregform.email"  name="email" required>
+            <input matInput placeholder="Email"  [(ngModel)]="vmregform.email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" name="email" required>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Password" [(ngModel)]="vmregform.password"  name="password" required>
+            <input matInput placeholder="Password" [(ngModel)]="vmregform.password"   type="password"  name="password" minlength="6" required>
+ 
         </mat-form-field>
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Confirm Password" [(ngModel)]="vmregform.confirm"  name="confirm" required>
+            <input matInput placeholder="Confirm Password" [(ngModel)]="vmregform.confirm" password-verify="[[vmregform.password]]" type="password"  name="confirm" required >
+            <div [hidden]="vmregform.password == vmregform.confirm">Passwords do not match and Password should be 6 digit!</div>
         </mat-form-field>
         <section class="example-section">
             <mat-checkbox class="example-margin" [(ngModel)]="vmregform.is_subscribed"  name="is_subscribed">Sign Up for Newsletter</mat-checkbox>
