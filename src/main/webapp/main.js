@@ -442,7 +442,7 @@ module.exports = ".example-form {\n    min-width: 150px;\n    max-width: 500px;\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<mat-card [ngClass]=\"{'custom-card':true}\"> CREATE AN ACCOUNT <mat-icon>account_box</mat-icon>\n<mat-card-subtitle> *Please enter the following information to create your account. </mat-card-subtitle>\n<div class=\"example-container\">\n    <form class=\"example-form\" #vmregform=\"ngForm\" (ngSubmit)=\"save(vmregform.value)\"> \n        <mat-form-field class=\"example-full-width\">\n          <input matInput placeholder=\"First Name\"  [(ngModel)]=\"vmregform.firstname\"  name=\"firstname\">\n         \n        </mat-form-field>\n        <mat-form-field class=\"example-full-width\">\n            <input matInput placeholder=\"Middle Name/Initial\" [(ngModel)]=\"vmregform.middlename\"  name=\"middlename\">\n        </mat-form-field>\n        <mat-form-field class=\"example-full-width\">\n            <input matInput placeholder=\"Last Name\" [(ngModel)]=\"vmregform.lastname\"  name=\"lastname\">\n        </mat-form-field>\n       \n        <mat-form-field class=\"example-full-width\">\n            <input matInput placeholder=\"Email\"  [(ngModel)]=\"vmregform.email\"  name=\"email\">\n        </mat-form-field>\n        <mat-form-field class=\"example-full-width\">\n            <input matInput placeholder=\"Password\" [(ngModel)]=\"vmregform.password\"  name=\"password\">\n        </mat-form-field>\n        <mat-form-field class=\"example-full-width\">\n            <input matInput placeholder=\"Confirm Password\" [(ngModel)]=\"vmregform.confirm\"  name=\"confirm\">\n        </mat-form-field>\n        <section class=\"example-section\">\n            <mat-checkbox class=\"example-margin\" [(ngModel)]=\"vmregform.is_subscribed\"  name=\"is_subscribed\">Sign Up for Newsletter</mat-checkbox>\n           </section>\n         <button mat-raised-button color=\"primary\"   [disabled]=\"!vmregform.form.valid\"\n         matTooltip=\"Info about the action\"\n         aria-label=\"Button that displays a tooltip when focused or hovered\"><mat-icon>save</mat-icon>Register</button>\n         <button mat-raised-button color=\"warn\"><mat-icon>undo</mat-icon>Reset</button>\n      </form>\n    \n  </div>\n  <mat-card-footer>* All Fields are mandatory</mat-card-footer>\n</mat-card>"
+module.exports = "\n<mat-card [ngClass]=\"{'custom-card':true}\"> CREATE AN ACCOUNT <mat-icon>account_box</mat-icon>\n<mat-card-subtitle> *Please enter the following information to create your account. </mat-card-subtitle>\n<div class=\"example-container\">\n    <form class=\"example-form\" #vmregform=\"ngForm\" (ngSubmit)=\"save(vmregform.value)\"> \n        <mat-form-field class=\"example-full-width\">\n          <input matInput placeholder=\"First Name\"  [(ngModel)]=\"vmregform.firstname\"  name=\"firstname\" required>\n         \n        </mat-form-field>\n        <mat-form-field class=\"example-full-width\">\n            <input matInput placeholder=\"Middle Name/Initial\" minlength=\"1\"  [(ngModel)]=\"vmregform.middlename\"  name=\"middlename\" required>\n        </mat-form-field>\n        <mat-form-field class=\"example-full-width\">\n            <input matInput placeholder=\"Last Name\" [(ngModel)]=\"vmregform.lastname\"  name=\"lastname\" required>\n        </mat-form-field>\n       \n        <mat-form-field class=\"example-full-width\">\n            <input matInput placeholder=\"Email\"  [(ngModel)]=\"vmregform.email\" pattern=\"^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$\" name=\"email\" required>\n        </mat-form-field>\n        <mat-form-field class=\"example-full-width\">\n            <input matInput placeholder=\"Password\" [(ngModel)]=\"vmregform.password\"   type=\"password\"  name=\"password\" minlength=\"6\" required>\n \n        </mat-form-field>\n        <mat-form-field class=\"example-full-width\">\n            <input matInput placeholder=\"Confirm Password\" [(ngModel)]=\"vmregform.confirm\" password-verify=\"[[vmregform.password]]\" type=\"password\"  name=\"confirm\" required >\n            <div [hidden]=\"vmregform.password == vmregform.confirm\">Passwords do not match and Password should be 6 digit!</div>\n        </mat-form-field>\n        <section class=\"example-section\">\n            <mat-checkbox class=\"example-margin\" [(ngModel)]=\"vmregform.is_subscribed\"  name=\"is_subscribed\">Sign Up for Newsletter</mat-checkbox>\n           </section>\n         <button mat-raised-button color=\"primary\"   [disabled]=\"!vmregform.form.valid\"\n         matTooltip=\"Info about the action\"\n         aria-label=\"Button that displays a tooltip when focused or hovered\"><mat-icon>save</mat-icon>Register</button>\n         <button mat-raised-button color=\"warn\"><mat-icon>undo</mat-icon>Reset</button>\n      </form>\n    \n  </div>\n  <mat-card-footer>* All Fields are mandatory</mat-card-footer>\n</mat-card>"
 
 /***/ }),
 
@@ -495,10 +495,10 @@ var VmregformComponent = /** @class */ (function () {
         ]);
     }
     VmregformComponent.prototype.ngOnInit = function () {
-        this.vmregform = this._fb.group({
-            firstname: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(5)]],
-            lastname: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(5)]],
-        });
+        //this.vmregform= this._fb.group({
+        this.vmregform.firstname = ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(5)]];
+        this.vmregform.lastname = ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(5)]];
+        // });
     };
     VmregformComponent.prototype.getErrorMessage = function () {
         return this.email.hasError('required') ? 'You must enter a value' :
@@ -550,17 +550,11 @@ __webpack_require__.r(__webpack_exports__);
 var VmregformService = /** @class */ (function () {
     function VmregformService(http) {
         this.http = http;
-        this.API = 'api/v3';
-        this.SERVICE_API = this.API + '/employees';
+        this.API = 'api/signup';
     }
     VmregformService.prototype.save = function (vmregform) {
         var result;
-        if (vmregform['href']) {
-            result = this.http.put(vmregform.href, vmregform);
-        }
-        else {
-            result = this.http.post(this.SERVICE_API, vmregform);
-        }
+        result = this.http.post(this.API, vmregform);
         return result;
     };
     VmregformService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -640,7 +634,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/Harish/git/springboot2/HCKSpringBoot/client/vmclient/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/Harish/git/VMCode_git/client/vmclient/src/main.ts */"./src/main.ts");
 
 
 /***/ })
