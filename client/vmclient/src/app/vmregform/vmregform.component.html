@@ -1,0 +1,37 @@
+
+<mat-card [ngClass]="{'custom-card':true}"> CREATE AN ACCOUNT <mat-icon>account_box</mat-icon>
+<mat-card-subtitle> *Please enter the following information to create your account. </mat-card-subtitle>
+<div class="example-container">
+    <form class="example-form" #vmregform="ngForm" (ngSubmit)="save(vmregform.value)"> 
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="First Name"  [(ngModel)]="vmregform.firstname"  name="firstname">
+         
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Middle Name/Initial" [(ngModel)]="vmregform.middlename"  name="middlename">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Last Name" [(ngModel)]="vmregform.lastname"  name="lastname">
+        </mat-form-field>
+       
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Email"  [(ngModel)]="vmregform.email"  name="email">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Password" [(ngModel)]="vmregform.password"  name="password">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Confirm Password" [(ngModel)]="vmregform.confirm"  name="confirm">
+        </mat-form-field>
+        <section class="example-section">
+            <mat-checkbox class="example-margin" [(ngModel)]="vmregform.is_subscribed"  name="is_subscribed">Sign Up for Newsletter</mat-checkbox>
+           </section>
+         <button mat-raised-button color="primary"   [disabled]="!vmregform.form.valid"
+         matTooltip="Info about the action"
+         aria-label="Button that displays a tooltip when focused or hovered"><mat-icon>save</mat-icon>Register</button>
+         <button mat-raised-button color="warn"><mat-icon>undo</mat-icon>Reset</button>
+      </form>
+    
+  </div>
+  <mat-card-footer>* All Fields are mandatory</mat-card-footer>
+</mat-card>
