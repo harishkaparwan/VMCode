@@ -4,24 +4,24 @@
 <div class="example-container">
     <form class="example-form" #vmregform="ngForm" (ngSubmit)="save(vmregform.value)"> 
         <mat-form-field class="example-full-width">
-          <input matInput placeholder="First Name"  [(ngModel)]="vmregform.firstname"  name="firstname">
+          <input matInput placeholder="First Name"  [(ngModel)]="vmregform.firstname"  name="firstname" required>
          
         </mat-form-field>
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Middle Name/Initial" [(ngModel)]="vmregform.middlename"  name="middlename">
+            <input matInput placeholder="Middle Name/Initial" [(ngModel)]="vmregform.middlename"  name="middlename" required>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Last Name" [(ngModel)]="vmregform.lastname"  name="lastname">
+            <input matInput placeholder="Last Name" [(ngModel)]="vmregform.lastname"  name="lastname" required>
         </mat-form-field>
        
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Email"  [(ngModel)]="vmregform.email"  name="email">
+            <input matInput placeholder="Email"  [(ngModel)]="vmregform.email"  name="email" required>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Password" [(ngModel)]="vmregform.password"  name="password">
+            <input matInput placeholder="Password" [(ngModel)]="vmregform.password"  name="password" required>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Confirm Password" [(ngModel)]="vmregform.confirm"  name="confirm">
+            <input matInput placeholder="Confirm Password" [(ngModel)]="vmregform.confirm"  name="confirm" required>
         </mat-form-field>
         <section class="example-section">
             <mat-checkbox class="example-margin" [(ngModel)]="vmregform.is_subscribed"  name="is_subscribed">Sign Up for Newsletter</mat-checkbox>
