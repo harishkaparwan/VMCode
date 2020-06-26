@@ -33,9 +33,9 @@ import io.swagger.annotations.ApiResponses;
 @RestController
 @RequestMapping("/api")
 public class RestApiController {
-	public static String  LOGIN="http://100.24.24.249/customer/account/login/";
-	public static String CREATE_POST="http://100.24.24.249/customer/account/createpost";
-	public static String INDEX_POST="http://100.24.24.249/customer/account/index/";
+	public static String  LOGIN="http://HOST_IP/customer/account/login/";
+	public static String CREATE_POST="http://HOST_IP/customer/account/createpost";
+	public static String INDEX_POST="http://HOST_IP/customer/account/index/";
 	public static String IS_SUBS="is_subscribed";
     RestTemplate restTemplate = new RestTemplate();
 	
@@ -156,7 +156,7 @@ public class RestApiController {
 			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 			con.setRequestMethod("POST");
 			con.addRequestProperty("Cookie",
-					"frontend=9297b78d68658ba4000eb74618d67676; expires=Sat, 30-Apr-2019 14:42:16 GMT; Max-Age=3600; path=/; domain=100.24.24.249; httponly");
+					"frontend=9297b78d68658ba4000eb74618d67676; expires=Sat, 30-Apr-2019 14:42:16 GMT; Max-Age=3600; path=/; domain=HOST_IP; httponly");
 			con.setRequestProperty("User-Agent",
 					"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:13.0) Gecko/20100101 Firefox/13.0.1");
 			con.setRequestProperty("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
@@ -166,7 +166,7 @@ public class RestApiController {
 			con.setRequestProperty("Accept-Encoding", "gzip, deflate");
 			con.setRequestProperty("Connection", "keep-alive");
 			con.setRequestProperty("Cookie",
-					"frontend=9297b78d68658ba4000eb74618d67676; expires=Sat, 30-Apr-2019 14:42:16 GMT; Max-Age=3600; path=/; domain=100.24.24.249; httponly");
+					"frontend=9297b78d68658ba4000eb74618d67676; expires=Sat, 30-Apr-2019 14:42:16 GMT; Max-Age=3600; path=/; domain=HOST_IP; httponly");
 			// Send post request
 			con.setDoOutput(true);
 			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
